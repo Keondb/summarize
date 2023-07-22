@@ -1,7 +1,7 @@
 <?php
 namespace app\admin;
 
-use app\lib\exception\Parameter;
+use app\lib\exception\BaseException;
 use think\db\exception\DataNotFoundException;
 use think\db\exception\ModelNotFoundException;
 use think\exception\Handle;
@@ -54,17 +54,20 @@ class ExceptionHandle extends Handle
         // 添加自定义异常处理机制
         // return json(['msg'=>$e->msg],$e->httpStatus);
         // 判断是否是自定义的异常
-        if($e instanceof Parameter){
+        if($e instanceof BaseException){
             return show($e->msg,$e->httpStatus,$e->errorCode);
             // return json(['msg'=>$e->msg],$e->httpStatus);
         }
+
+        // $message = mb_convert_encoding($e->getMessage(),'UTF-8','UTF-8,GBK,GB2312,BIG5');
+        $message = $e->getMessage();
         if($e instanceof \Exception){
             if (env('APP_DEBUG')) {
-                return show($e->getMessage(),$e->getCode());
+                return show($message,$e->getCode());
             }else{
                 return show('系统内部错误',$e->getCode());
             }
-           
+             
             // return json(['msg'=>$e->getMessage()]);
         }
         

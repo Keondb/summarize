@@ -16,9 +16,11 @@ class Account
             Validate(AccountValidate::class)->scene('login')->check($params);
         } catch (ValidateException $e) {
             //获取异常  自己接管异常处理
-            throw new \Exception($e->getMessage());
+            // throw new \Exception($e->getMessage());
             // return json(['msg'=>$e->getMessage(),'code'=>300]);
-            // throw new Parameter(); 
+            throw new Parameter([
+                    'msg'=>$e->getMessage()
+            ]); 
         }
         return $next($request);
     }
