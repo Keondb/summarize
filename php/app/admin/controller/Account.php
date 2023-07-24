@@ -3,10 +3,15 @@ declare (strict_types = 1);
 
 namespace app\admin\controller;
 
+use app\Request;
+use app\admin\service\Account as AccountService;
+
 class Account
 {
-    public function login()
+    public function login(Request $request)
     {
-        echo "account/login";
+        $params = $request->params;
+        $token = (new AccountService())->getToken($params);
+        return sucess($params);
     }
 }
