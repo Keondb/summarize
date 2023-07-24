@@ -12,6 +12,11 @@ class Account
     {
         $params = $request->params;
         $token = (new AccountService())->getToken($params);
-        return sucess($params);
+        return sucess($token);
+    }
+
+    public function info(Request $request) {
+        $uid = $request->uid;
+        return sucess(['uid'=>$uid]);
     }
 }

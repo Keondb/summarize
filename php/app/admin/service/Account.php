@@ -34,7 +34,7 @@ class Account
             throw new \Exception('服务器缓存异常');
         }
 
-        return $request;
+        return $token;
     }
 
     public static function generateToken()
