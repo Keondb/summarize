@@ -6,6 +6,11 @@ function sucess($data = [],$msg = '操作成功'){
   return show($msg,200,10000,$data);
 }
 
+// 公共json 返回格式
+function fail($msg = '操作失败',$data = []){
+  return show($msg,300,10000,$data);
+}
+
 
 // 公共json 返回格式
 function show($msg,$httpStatus = 200,$code = 10000,$data = []){
