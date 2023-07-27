@@ -27,4 +27,18 @@ class BaseValidate extends Validate
     {
         return true;
     }
+    protected function isCommaString($value, $rule = '', $data = '', $field = '')
+    {
+        if (strpos($value,',')) {
+            $spec_values = explode(',',$value);
+            foreach ($spec_values as $spec_value) {
+                if (!is_numeric($spec_value) || $spec_value == 0) {
+                    return $field . '格式错误';
+                }
+            }
+        }elseif (!is_numeric($value) || $value == 0) {
+            return $field . '格式错误';
+        }
+        return true;
+    }
 }
